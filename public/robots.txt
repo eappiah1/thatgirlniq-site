@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://thatgirlniq-site-hrgok.ondigitalocean.app/sitemap.xml
+Sitemap: https://thatgirlniq.com/sitemap.xml
