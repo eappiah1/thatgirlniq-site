@@ -18,9 +18,14 @@ export function absoluteUrl(path = ''): string {
   return path ? `${base}${path}` : window.location.href;
 }
 
-/** Clip share URLs look like thatgirlniq.com/clips/tiktok-<id> (see ClipRedirect route). */
+/**
+ * Clip share URLs use a #hash form (thatgirlniq.com/#clip-<id>) so they
+ * work on plain static hosting with zero server config. The /clips/:id
+ * client route also exists for the day the platform's SPA fallback
+ * (catchall → index.html) is enabled.
+ */
 export function clipShareUrl(clipId: string): string {
-  return `${window.location.protocol}//${window.location.host}/clips/tiktok-${clipId}`;
+  return `${window.location.protocol}//${window.location.host}/#clip-${clipId}`;
 }
 
 export const shareTargets = {

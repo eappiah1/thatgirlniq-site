@@ -1,4 +1,4 @@
-import { useCallback } from 'react';
+import { useCallback, useEffect } from 'react';
 import { Navbar } from '@/sections/Navbar';
 import { Hero } from '@/sections/Hero';
 import { About } from '@/sections/About';
@@ -19,6 +19,15 @@ function Page() {
   const { toast } = useToast();
 
   useShareNudge(() => toast('Vibing? Share ThatGirlNiq with a friend 🎤🔥'));
+
+  // shared clip links (thatgirlniq.com/#clip-<id>) land on the Video Vault
+  useEffect(() => {
+    if (window.location.hash.startsWith('#clip-')) {
+      window.setTimeout(() => {
+        document.getElementById('videos')?.scrollIntoView({ behavior: 'smooth' });
+      }, 600);
+    }
+  }, []);
 
   return (
     <div className="grain min-h-screen bg-[var(--bg)] text-[var(--ink)]">
