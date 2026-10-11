@@ -1,0 +1,17 @@
+# DigitalOcean App Platform spec — ThatGirlNiq static site
+# Docs: https://docs.digitalocean.com/products/app-platform/reference/app-spec/
+name: thatgirlniq-site
+
+static_sites:
+- name: web
+  # GitHub source — App Platform UI will fill in repo/branch when you connect it.
+  # If you connect the repo in the dashboard instead, this file is optional.
+  github:
+    repo: eappiah1/thatgirlniq-site
+    branch: main
+    deploy_on_push: true
+  build_command: npm ci && npm run build
+  output_dir: dist
+  index_document: index.html
+  # SPA fallback: any unknown path serves the app shell
+  catchall_document: index.html
