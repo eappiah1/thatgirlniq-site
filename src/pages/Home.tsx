@@ -7,6 +7,7 @@ import { LiveShows } from '@/sections/LiveShows';
 import { SocialProof } from '@/sections/SocialProof';
 import { Connect } from '@/sections/Connect';
 import { Footer } from '@/sections/Footer';
+import { NiqBot } from '@/components/NiqBot';
 import { useTheme } from '@/hooks/useTheme';
 
 export default function Home() {
@@ -25,6 +26,7 @@ export default function Home() {
         <Connect />
       </main>
       <Footer />
+      <NiqBot />
     </div>
   );
 }
