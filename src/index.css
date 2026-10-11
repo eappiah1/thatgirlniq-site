@@ -1,0 +1,290 @@
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* ThatGirlNiq brand — dark mode is the default */
+    --bg: #0a0a0a;
+    --bg-soft: #121212;
+    --bg-card: rgba(255, 255, 255, 0.04);
+    --ink: #f5f5f5;
+    --ink-dim: rgba(245, 245, 245, 0.62);
+    --ink-faint: rgba(245, 245, 245, 0.38);
+    --line: rgba(245, 245, 245, 0.12);
+    --violet: #8b5cf6;
+    --magenta: #ff2d9a;
+    --neon: #e8ff3c;
+    --gold: #ffc53d;
+    --grad: linear-gradient(100deg, #8b5cf6 0%, #ff2d9a 55%, #ffc53d 110%);
+
+    /* shadcn tokens (kept for pre-installed ui components) */
+    --background: 0 0% 4%;
+    --foreground: 0 0% 96%;
+    --card: 0 0% 7%;
+    --card-foreground: 0 0% 96%;
+    --popover: 0 0% 7%;
+    --popover-foreground: 0 0% 96%;
+    --primary: 262 83% 66%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 0 0% 12%;
+    --secondary-foreground: 0 0% 96%;
+    --muted: 0 0% 12%;
+    --muted-foreground: 0 0% 60%;
+    --accent: 0 0% 12%;
+    --accent-foreground: 0 0% 96%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 16%;
+    --input: 0 0% 16%;
+    --ring: 262 83% 66%;
+    --radius: 0.625rem;
+  }
+
+  [data-theme='light'] {
+    --bg: #f7f5f2;
+    --bg-soft: #ffffff;
+    --bg-card: rgba(10, 10, 10, 0.035);
+    --ink: #111013;
+    --ink-dim: rgba(17, 16, 19, 0.68);
+    --ink-faint: rgba(17, 16, 19, 0.42);
+    --line: rgba(17, 16, 19, 0.14);
+    --violet: #6d28d9;
+    --magenta: #db1f7e;
+    --neon: #6b7a00;
+    --gold: #b07d10;
+    --grad: linear-gradient(100deg, #6d28d9 0%, #db1f7e 55%, #b07d10 110%);
+    --background: 40 20% 96%;
+    --foreground: 260 8% 7%;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    overflow-x: clip;
+  }
+
+  body {
+    background-color: var(--bg);
+    color: var(--ink);
+    font-family: 'Inter', system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: clip;
+  }
+
+  ::selection {
+    background: var(--magenta);
+    color: #fff;
+  }
+
+  h1, h2, h3, .font-display {
+    font-family: 'Syne', 'Inter', sans-serif;
+  }
+}
+
+@layer components {
+  /* ---------- grain overlay ---------- */
+  .grain::after {
+    content: '';
+    position: fixed;
+    inset: -50%;
+    width: 200%;
+    height: 200%;
+    pointer-events: none;
+    z-index: 90;
+    opacity: 0.05;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    animation: grain-shift 9s steps(6) infinite;
+  }
+
+  [data-theme='light'] .grain::after {
+    opacity: 0.07;
+  }
+
+  @keyframes grain-shift {
+    0%, 100% { transform: translate(0, 0); }
+    20% { transform: translate(-3%, 2%); }
+    40% { transform: translate(2%, -3%); }
+    60% { transform: translate(-2%, -2%); }
+    80% { transform: translate(3%, 3%); }
+  }
+
+  /* ---------- typography helpers ---------- */
+  .display-hero {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    line-height: 0.92;
+    letter-spacing: -0.03em;
+    text-transform: uppercase;
+  }
+
+  .text-grad {
+    background: var(--grad);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .outline-text {
+    color: transparent;
+    -webkit-text-stroke: 1.5px var(--ink);
+  }
+
+  .eyebrow {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--ink-dim);
+  }
+
+  /* ---------- reveal on scroll ---------- */
+  .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+      transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+    transition-delay: var(--reveal-delay, 0ms);
+  }
+
+  .reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .reveal { transition: none; opacity: 1; transform: none; }
+    .grain::after { animation: none; }
+    html { scroll-behavior: auto; }
+  }
+
+  /* ---------- buttons ---------- */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 0.85rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 1rem 1.9rem;
+    border-radius: 999px;
+    transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.25s, background 0.25s, color 0.25s;
+    cursor: pointer;
+    white-space: nowrap;
+  }
+
+  .btn:hover { transform: translateY(-3px) scale(1.02); }
+  .btn:active { transform: translateY(0) scale(0.98); }
+
+  .btn-primary {
+    background: var(--grad);
+    color: #fff;
+    box-shadow: 0 8px 32px rgba(255, 45, 154, 0.35);
+  }
+
+  .btn-primary:hover { box-shadow: 0 14px 44px rgba(255, 45, 154, 0.5); }
+
+  .btn-ghost {
+    border: 1.5px solid var(--line);
+    color: var(--ink);
+    background: transparent;
+  }
+
+  .btn-ghost:hover { border-color: var(--magenta); color: var(--magenta); }
+
+  .btn-neon {
+    background: var(--neon);
+    color: #0a0a0a;
+  }
+
+  [data-theme='light'] .btn-neon { color: #fff; }
+
+  /* ---------- glass card ---------- */
+  .glass {
+    background: var(--bg-card);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border: 1px solid var(--line);
+    border-radius: 1.25rem;
+  }
+
+  /* ---------- marquee ---------- */
+  .marquee-track {
+    display: flex;
+    width: max-content;
+    animation: marquee 26s linear infinite;
+  }
+
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  /* ---------- ken burns hero ---------- */
+  .ken-burns {
+    animation: ken-burns 22s ease-in-out infinite alternate;
+  }
+
+  @keyframes ken-burns {
+    from { transform: scale(1) translateY(0); }
+    to { transform: scale(1.12) translateY(-2.5%); }
+  }
+
+  /* ---------- scroll indicator ---------- */
+  .scroll-dot {
+    animation: scroll-dot 1.8s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+  }
+
+  @keyframes scroll-dot {
+    0% { transform: translateY(0); opacity: 1; }
+    70% { transform: translateY(16px); opacity: 0; }
+    100% { transform: translateY(0); opacity: 0; }
+  }
+
+  /* ---------- misc ---------- */
+  .clip-card img {
+    transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1), filter 0.4s;
+  }
+
+  .clip-card:hover img {
+    transform: scale(1.06);
+    filter: saturate(1.15);
+  }
+
+  .nav-link {
+    position: relative;
+    font-family: 'Syne', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-dim);
+    transition: color 0.2s;
+  }
+
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -5px;
+    width: 0;
+    height: 2px;
+    background: var(--grad);
+    transition: width 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .nav-link:hover { color: var(--ink); }
+  .nav-link:hover::after { width: 100%; }
+
+  .parallax-img {
+    will-change: transform;
+  }
+}
