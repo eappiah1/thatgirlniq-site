@@ -61,7 +61,44 @@ Uncomment the GA4 block in `index.html` and replace `G-XXXXXXXXXX` when going li
 
 ## Stack
 
-React 18 + TypeScript + Vite 7 + Tailwind CSS 3.4. Scroll reveals use `IntersectionObserver`
+React 19 + TypeScript + Vite 7 + Tailwind CSS 3.4. Scroll reveals use `IntersectionObserver`
 (`src/hooks/useInView.ts`), the live countdown lives in `src/hooks/useCountdown.ts`,
 the dark/light toggle in `src/hooks/useTheme.ts`. Respects `prefers-reduced-motion`.
 Videos are official TikTok embeds — no media is re-hosted.
+
+## Deploy — DigitalOcean App Platform (recommended)
+
+This is a **fully static site with zero secrets and zero environment variables**.
+The build (`npm ci && npm run build`) outputs plain HTML/CSS/JS to `dist/` — nothing
+server-side, no API keys, no database. The only "environment value" is the site URL,
+already baked into `index.html`, `public/sitemap.xml`, and `public/robots.txt`
+as `https://thatgirlniq.com` — if the real domain differs, update those three files.
+
+1. **Push to GitHub**
+   ```bash
+   git remote add origin https://github.com/<you>/thatgirlniq-site.git
+   git push -u origin main
+   ```
+2. **DigitalOcean → Apps → Create App → GitHub** — authorize DigitalOcean, pick the
+   `thatgirlniq-site` repo. It auto-detects Vite; confirm:
+   - Build command: `npm ci && npm run build`
+   - Output dir: `dist`
+   (or skip the UI config entirely — `.do/app.yaml` at the repo root declares all of it)
+3. **Domain** — in the app → Settings → Domains, add `thatgirlniq.com`, then point DNS:
+   `A` record `@` → the app's IP, or CNAME per DigitalOcean's instructions. HTTPS is
+   auto-provisioned (Let's Encrypt) once DNS resolves.
+4. **Redeploys** — automatic on every push to `main` (`deploy_on_push: true`).
+
+### Security notes
+
+- No `.env` files exist in this repo and none are needed — keep it that way.
+- If a chatbot or backend is ever added, store its keys in the App Platform
+  dashboard (App → Settings → App-Level Environment Variables) — never in code.
+- Enable 2FA on the DigitalOcean account; scope any API token to App Platform only.
+
+### Alternatives
+
+- **Spaces (static hosting)**: `npm run build`, upload `dist/` to a CDN-enabled Space,
+  enable static site hosting, point DNS. Good if you outgrow App Platform's free tier.
+- **Droplet + Nginx**: only worth it if you later add a backend. Ubuntu 24.04,
+  Node 22+, Nginx serving `dist/`, Certbot for SSL, UFW allowing 22/80/443.
