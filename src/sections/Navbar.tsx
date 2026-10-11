@@ -101,7 +101,7 @@ export function Navbar({ theme, onToggleTheme }: NavbarProps) {
               <a
                 href={l.href}
                 onClick={() => setOpen(false)}
-                className="display-hero block py-2 text-5xl text-[var(--ink)] transition-colors hover:text-[var(--magenta)]"
+                className="font-display block py-3 text-3xl font-extrabold uppercase tracking-tight text-[var(--ink)] transition-colors hover:text-[var(--magenta)] sm:text-4xl"
               >
                 {l.label}
               </a>
