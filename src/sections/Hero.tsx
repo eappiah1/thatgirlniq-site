@@ -1,6 +1,27 @@
 import { useEffect, useState } from 'react';
 import { clips, site } from '@/data/content';
-import { InstagramIcon, PlayIcon, TikTokIcon, VideoIcon } from '@/components/Icons';
+import { InstagramIcon, LinkIcon, PlayIcon, TikTokIcon, VideoIcon } from '@/components/Icons';
+import { useToast } from '@/components/Toast';
+import { absoluteUrl, copyText, trackShare } from '@/lib/share';
+
+/** Small, subtle copy-link button for the hero row. */
+function CopyLinkButton() {
+  const { toast } = useToast();
+  return (
+    <button
+      type="button"
+      onClick={async () => {
+        trackShare('share_copy_link', { source: 'hero' });
+        const ok = await copyText(absoluteUrl());
+        toast(ok ? 'Link copied! 🔗 Share it everywhere' : 'Copy failed — long-press the address bar');
+      }}
+      className="inline-flex items-center gap-2 text-sm font-semibold text-[var(--ink-dim)] underline-offset-4 transition-colors hover:text-[var(--magenta)] hover:underline"
+    >
+      <LinkIcon className="h-4 w-4" />
+      Copy link
+    </button>
+  );
+}
 
 /**
  * Full-screen hero. Background is Niq's real profile photo (pulled from
@@ -68,6 +89,7 @@ export function Hero() {
               <VideoIcon className="h-4 w-4" />
               Join Live Show
             </a>
+            <CopyLinkButton />
           </div>
 
           <div

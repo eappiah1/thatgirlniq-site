@@ -8,11 +8,17 @@ import { SocialProof } from '@/sections/SocialProof';
 import { Connect } from '@/sections/Connect';
 import { Footer } from '@/sections/Footer';
 import { NiqBot } from '@/components/NiqBot';
+import { ShareBar } from '@/components/ShareBar';
+import { ToastProvider, useToast } from '@/components/Toast';
+import { useShareNudge } from '@/hooks/useShareNudge';
 import { useTheme } from '@/hooks/useTheme';
 
-export default function Home() {
+function Page() {
   const { theme, toggle } = useTheme();
   const onToggleTheme = useCallback(toggle, [toggle]);
+  const { toast } = useToast();
+
+  useShareNudge(() => toast('Vibing? Share ThatGirlNiq with a friend 🎤🔥'));
 
   return (
     <div className="grain min-h-screen bg-[var(--bg)] text-[var(--ink)]">
@@ -27,6 +33,15 @@ export default function Home() {
       </main>
       <Footer />
       <NiqBot />
+      <ShareBar />
     </div>
+  );
+}
+
+export default function Home() {
+  return (
+    <ToastProvider>
+      <Page />
+    </ToastProvider>
   );
 }

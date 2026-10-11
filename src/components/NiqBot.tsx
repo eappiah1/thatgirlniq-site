@@ -202,7 +202,7 @@ export function NiqBot() {
         type="button"
         aria-label={open ? 'Close NiqBot chat' : 'Chat with NiqBot'}
         onClick={() => setOpen((o) => !o)}
-        className="fixed bottom-5 right-5 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-[var(--magenta)] text-white shadow-lg transition-transform hover:scale-105 active:scale-95"
+        className="fixed bottom-20 right-4 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-[var(--magenta)] text-white shadow-lg transition-transform hover:scale-105 active:scale-95 md:bottom-5 md:right-5"
       >
         {open ? <CloseIcon className="h-6 w-6" /> : <ChatIcon className="h-6 w-6" />}
       </button>
@@ -212,7 +212,7 @@ export function NiqBot() {
         <div
           role="dialog"
           aria-label="NiqBot chat"
-          className="fixed bottom-[5.5rem] right-5 z-50 flex h-[28rem] w-[calc(100vw-2.5rem)] max-w-sm flex-col overflow-hidden rounded-2xl border border-[var(--line)] bg-[var(--bg)] text-[var(--ink)] shadow-2xl"
+          className="fixed bottom-[8.75rem] right-4 z-50 flex h-[28rem] w-[calc(100vw-2.5rem)] max-w-sm flex-col overflow-hidden rounded-2xl border border-[var(--line)] bg-[var(--bg)] text-[var(--ink)] shadow-2xl md:bottom-[5.5rem] md:right-5"
           onKeyDown={(e) => e.key === 'Escape' && setOpen(false)}
         >
           <div className="flex items-center gap-3 border-b border-[var(--line)] bg-[var(--bg-card)] px-4 py-3">

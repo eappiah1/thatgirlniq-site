@@ -2,6 +2,8 @@ import { useMemo, useState } from 'react';
 import { clips, igReels, site } from '@/data/content';
 import { Reveal } from '@/components/Reveal';
 import { ArrowUpRight, InstagramIcon, TikTokIcon } from '@/components/Icons';
+import { ShareMenu } from '@/components/ShareMenu';
+import { clipShareUrl } from '@/lib/share';
 
 type Filter = 'all' | string;
 
@@ -67,7 +69,19 @@ export function VideoGallery() {
         <div className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
           {shown.map((clip, i) => (
             <Reveal key={clip.id} delay={(i % 3) * 90}>
-              <article className="overflow-hidden rounded-2xl border border-[var(--line)] bg-black transition-all duration-300 hover:-translate-y-1 hover:border-[var(--magenta)]/50">
+              <article
+                data-clip-card
+                className="relative overflow-hidden rounded-2xl border border-[var(--line)] bg-black transition-all duration-300 hover:-translate-y-1 hover:border-[var(--magenta)]/50"
+              >
+                <div className="absolute right-3 top-3 z-20">
+                  <ShareMenu
+                    url={clipShareUrl(clip.id)}
+                    title="ThatGirlNiq on TikTok"
+                    text={`"${clip.caption}" — ${clip.views} views. You gotta watch this 🔥🎤`}
+                    detail={{ clip: clip.id }}
+                    className="glass flex h-9 w-9 items-center justify-center rounded-full text-white shadow-lg transition-transform hover:scale-110"
+                  />
+                </div>
                 <iframe
                   src={`https://www.tiktok.com/embed/${clip.id}`}
                   title={`ThatGirlNiq on TikTok: ${clip.caption}`}

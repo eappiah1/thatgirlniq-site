@@ -1,7 +1,9 @@
 import { site } from '@/data/content';
 import { useCountdown } from '@/hooks/useCountdown';
 import { Reveal } from '@/components/Reveal';
-import { VideoIcon } from '@/components/Icons';
+import { DownloadIcon, VideoIcon } from '@/components/Icons';
+import { ShareMenu } from '@/components/ShareMenu';
+import { absoluteUrl, trackShare } from '@/lib/share';
 
 const pad = (n: number) => String(n).padStart(2, '0');
 
@@ -79,15 +81,28 @@ export function LiveShows() {
               <VideoIcon className="h-4 w-4" />
               Join Next Live Set
             </a>
+            <ShareMenu
+              url={absoluteUrl('/#live')}
+              title="ThatGirlNiq LIVE"
+              text={`🎤 ThatGirlNiq is performing LIVE right now!\nJoin the show: ${site.zoomUrl}\nYou don't wanna miss this 🔥`}
+              detail={{ source: 'live_show' }}
+              label="Share This Show"
+              className="btn btn-neon"
+            />
             <a
-              href={site.zoomUrl}
-              target="_blank"
-              rel="noopener noreferrer"
+              href="/assets/og-live.jpg"
+              download="thatgirlniq-live.jpg"
+              onClick={() => trackShare('share_live_show', { type: 'image_card' })}
               className="text-sm text-[var(--ink-dim)] underline-offset-4 transition-colors hover:text-[var(--magenta)] hover:underline"
             >
-              Or save the Zoom room link →
+              <span className="inline-flex items-center gap-1.5">
+                <DownloadIcon className="h-3.5 w-3.5" /> Share card (image)
+              </span>
             </a>
           </div>
+          <p className="mt-6 text-sm text-[var(--ink-faint)]">
+            Know someone who needs a laugh? Share the show 💛
+          </p>
         </Reveal>
       </div>
     </section>

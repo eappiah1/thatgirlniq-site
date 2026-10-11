@@ -125,8 +125,7 @@ export const VideoIcon = (props: P) => (
   </svg>
 );
 
-export const LogoMark = (props: P) => (
-  <svg viewBox="0 0 48 48" fill="none" {...props}>
+export const LogoMark = (props: P) => (  <svg viewBox="0 0 48 48" fill="none" {...props}>
     <rect x="2" y="2" width="44" height="44" rx="12" fill="url(#niq-g)" />
     <path
       d="M13 15v5h6.5v13h5V20H31v-5H13Z"
@@ -140,5 +139,47 @@ export const LogoMark = (props: P) => (
         <stop offset="1" stopColor="#ffc53d" />
       </linearGradient>
     </defs>
+  </svg>
+);
+
+/* ---------- share platform icons (fill-based brand glyphs) ---------- */
+
+export const WhatsAppIcon = (props: P) => (
+  <svg viewBox="0 0 24 24" fill="currentColor" {...props}>
+    <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.87 9.87 0 0 0 4.74 1.21h.01c5.46 0 9.9-4.45 9.9-9.91A9.85 9.85 0 0 0 12.04 2Zm0 18.03h-.01a8.2 8.2 0 0 1-4.18-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.2 8.2 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.25-8.24a8.2 8.2 0 0 1 8.24 8.25c0 4.54-3.7 8.23-8.25 8.23Zm4.52-6.16c-.25-.13-1.47-.72-1.69-.8-.23-.09-.4-.13-.56.12-.17.25-.64.8-.78.97-.14.16-.29.18-.54.06-.25-.13-1.05-.39-2-1.23-.73-.66-1.23-1.47-1.38-1.72-.14-.25-.01-.38.11-.51.11-.11.25-.29.37-.43.12-.15.16-.25.25-.41.08-.17.04-.31-.02-.43-.06-.13-.56-1.35-.77-1.84-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.43.06-.66.31-.22.25-.86.85-.86 2.07 0 1.22.89 2.4 1.01 2.56.13.17 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.6.19 1.13.16 1.56.1.48-.07 1.47-.6 1.67-1.18.21-.58.21-1.07.15-1.18-.06-.1-.23-.16-.48-.29Z" />
+  </svg>
+);
+
+export const TelegramIcon = (props: P) => (
+  <svg viewBox="0 0 24 24" fill="currentColor" {...props}>
+    <path d="M11.94 0A12 12 0 1 0 24 12.06 12 12 0 0 0 11.94 0Zm5.89 8.16-1.97 9.3c-.15.66-.54.82-1.09.51l-3-2.21-1.45 1.4c-.16.16-.3.3-.6.3l.21-3.05 5.56-5.02c.24-.21-.05-.33-.37-.12l-6.87 4.33-2.96-.93c-.64-.2-.66-.64.14-.95l11.57-4.46c.54-.2 1.01.13.83.9Z" />
+  </svg>
+);
+
+export const SmsIcon = (props: P) => (
+  <svg viewBox="0 0 24 24" fill="currentColor" {...props}>
+    <path d="M4 2a3 3 0 0 0-3 3v18l6-4h13a3 3 0 0 0 3-3V5a3 3 0 0 0-3-3H4Zm2.5 6.5h2v2h-2v-2Zm5 0h2v2h-2v-2Zm5 0h2v2h-2v-2Z" />
+  </svg>
+);
+
+export const LinkIcon = (props: P) => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}>
+    <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
+    <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
+  </svg>
+);
+
+export const QrIcon = (props: P) => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}>
+    <rect x="3" y="3" width="7" height="7" rx="1" />
+    <rect x="14" y="3" width="7" height="7" rx="1" />
+    <rect x="3" y="14" width="7" height="7" rx="1" />
+    <path d="M14 14h3v3h-3zM21 14v1M14 21h1M18 18h3v3h-3z" />
+  </svg>
+);
+
+export const DownloadIcon = (props: P) => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}>
+    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3" />
   </svg>
 );

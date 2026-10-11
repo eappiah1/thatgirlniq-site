@@ -1,0 +1,13 @@
+{
+  "name": "ThatGirlNiq — Comedy, Real Life & Live Virtual Shows",
+  "short_name": "ThatGirlNiq",
+  "description": "Watch ThatGirlNiq's sets and catch live virtual comedy shows.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0a0a0a",
+  "theme_color": "#0a0a0a",
+  "icons": [
+    { "src": "/assets/avatar.jpg", "sizes": "512x512", "type": "image/jpeg", "purpose": "any" },
+    { "src": "/assets/avatar.jpg", "sizes": "192x192", "type": "image/jpeg", "purpose": "any" }
+  ]
+}
